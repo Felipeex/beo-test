@@ -2,11 +2,11 @@ import { Sequelize } from "sequelize";
 import "dotenv/config";
 
 export const database = new Sequelize(
-  process.env.DATABASE_NAME as any,
-  process.env.DATABASE_USER as any,
-  process.env.DATABASE_PASSWORD as any,
+  process.env.DATABASE_NAME!,
+  process.env.DATABASE_USER!,
+  process.env.DATABASE_PASSWORD!,
   {
-    host: process.env.DATABASE_HOST as any,
+    host: process.env.DATABASE_HOST!,
     dialect: "mysql",
   }
 );

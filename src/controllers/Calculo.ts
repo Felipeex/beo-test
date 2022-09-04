@@ -72,7 +72,9 @@ export const calculateService = async (
       findCnpj.valor_hora *
       8 *
       finalDate
-    ).toLocaleString("pt-BR", { minimumFractionDigits: 2 });
+    ).toLocaleString("pt-BR", {
+      minimumFractionDigits: 2,
+    }); /* calculate value */
 
     successServerMessage(res, { status: 200, valor_calculado });
   }

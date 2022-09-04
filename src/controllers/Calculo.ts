@@ -62,18 +62,17 @@ export const calculateService = async (
 
   var startDate = new Date(data_inicio);
   var finishDate = new Date(data_fim);
-  var calculate = finishDate.getTime() - startDate.getTime();
-  var diffDays = Math.ceil(calculate / (1000 * 3600 * 24));
 
   var finalDate = getBusinessDatesCount(startDate, finishDate);
 
   const findCnpj = await empresa.findOne({ where: { cnpj } });
 
   if (findCnpj?.valor_hora) {
-    const valor_calculado = (findCnpj.valor_hora * finalDate).toLocaleString(
-      "pt-BR",
-      { minimumFractionDigits: 2 }
-    );
+    const valor_calculado = (
+      findCnpj.valor_hora *
+      8 *
+      finalDate
+    ).toLocaleString("pt-BR", { minimumFractionDigits: 2 });
 
     successServerMessage(res, { status: 200, valor_calculado });
   }

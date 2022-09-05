@@ -1,26 +1,25 @@
+/* libs */
 import { Response, Request, NextFunction } from "express";
 
-import { ValidadeCNPJ } from "../helpers/patterns";
+/* helpers */
+import { ValidadeCNPJ } from "../helpers/util/patterns";
 import {
   badServerMessage,
   internalErrorServerMessage,
 } from "../helpers/responseMessage";
 
+/* models */
 import { empresa } from "../models/Empresa";
 
-interface reqProps {
-  nome: string;
-  cnpj: string;
-  data_fundacao: string;
-  valor_hora: number;
-}
+/* interface */
+import { companyProps } from "../interface/Props";
 
 export const validateCompany = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const { nome, cnpj, data_fundacao, valor_hora }: reqProps = req.body;
+  const { nome, cnpj, data_fundacao, valor_hora }: companyProps = req.body;
 
   if (!nome)
     return badServerMessage(res, {
@@ -88,6 +87,7 @@ export const insertCompany = async (
       status: 500,
       code: "INTERNAL_ERROR",
       message: "error database connection",
+      error: err,
     });
     console.error(err);
   }

@@ -1,24 +1,24 @@
+/* libs */
 import { Response, Request, NextFunction } from "express";
 
+/* helpers */
 import {
   badServerMessage,
   successServerMessage,
 } from "../helpers/responseMessage";
 
-import { empresa } from "../models/Empresa";
+/* interface */
+import { calculoProps } from "../interface/Props";
 
-interface reqProps {
-  cnpj: string;
-  data_inicio: string;
-  data_fim: string;
-}
+/* models */
+import { empresa } from "../models/Empresa";
 
 export const validateCalculo = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const { cnpj, data_inicio, data_fim }: reqProps = req.body;
+  const { cnpj, data_inicio, data_fim }: calculoProps = req.body;
 
   if (!cnpj)
     return badServerMessage(res, {
@@ -58,7 +58,7 @@ export const calculateService = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { cnpj, data_inicio, data_fim }: reqProps = req.body;
+  const { cnpj, data_inicio, data_fim }: calculoProps = req.body;
 
   var startDate = new Date(data_inicio);
   var finishDate = new Date(data_fim);
